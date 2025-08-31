@@ -1,3 +1,4 @@
 ﻿from bookshelf.models import Book
-Book.objects.filter(id=1).delete()
-Book.objects.count()  # 0
+book = Book.objects.get(title="Nineteen Eighty-Four")
+book.delete()
+Book.objects.count()  # Expected: 0
