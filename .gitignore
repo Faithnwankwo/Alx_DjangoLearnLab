@@ -13,5 +13,5 @@ db.sqlite3
 .DS_Store
 Thumbs.db
 
-# Env files
+# Secrets
 .env
