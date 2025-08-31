@@ -1,5 +1,5 @@
 ﻿from bookshelf.models import Book
-book = Book.objects.get(id=1)  # use the id you created
+book = Book.objects.get(title="1984")
 book.id
 book.title
 book.author
