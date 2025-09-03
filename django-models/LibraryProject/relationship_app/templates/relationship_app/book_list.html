@@ -1,0 +1,11 @@
+﻿{% extends "relationship_app/base.html" %}
+{% block content %}
+<h2>Books</h2>
+<ul>
+{% for b in object_list %}
+  <li><a href="{% url 'book_detail' b.pk %}">{{ b.title }}</a> — {{ b.author.name }}</li>
+{% empty %}
+  <li>No books yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}
