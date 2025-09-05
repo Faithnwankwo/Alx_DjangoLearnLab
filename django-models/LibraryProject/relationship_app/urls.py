@@ -26,3 +26,4 @@ urlpatterns = [
     # Existing custom signup (ok to keep)
     path("accounts/signup/", views.signup, name="signup"),
 ]
+
