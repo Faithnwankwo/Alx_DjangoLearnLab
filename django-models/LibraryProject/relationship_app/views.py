@@ -54,15 +54,12 @@ def signup(request):
         form = SignUpForm()
     return render(request, "registration/signup.html", {"form": form})
 
-# ===== REQUIRED FOR THE TASK =====
+# ===== Required for the task =====
 
-# Function-based view: simple PLAIN TEXT list of "title by author"
+# Function-based view: render list of books with template
 def list_books(request):
     books = Book.objects.all()
-    lines = []
-    for book in books:
-        lines.append(f"{book.title} by {book.author.name}")
-    return HttpResponse("\n".join(lines), content_type="text/plain")
+    return render(request, "relationship_app/list_books.html", {"books": books})
 
 # Class-based view: details for a specific library + its books
 class LibraryDetailView(DetailView):
