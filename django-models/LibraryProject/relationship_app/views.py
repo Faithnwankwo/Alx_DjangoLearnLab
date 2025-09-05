@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth import login
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, CreateView
+from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from .models import Book`r`nfrom .models import Library
 from .forms import SignUpForm
@@ -71,4 +72,5 @@ class LibraryDetailView(DetailView):
         ctx = super().get_context_data(**kwargs)
         ctx["books"] = self.object.books.all()
         return ctx
+
 
