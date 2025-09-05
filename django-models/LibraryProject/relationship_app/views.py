@@ -13,17 +13,15 @@ def home(request):
     ctx = {"book_count": Book.objects.count(), "library_count": Library.objects.count()}
     return render(request, "relationship_app/home.html", ctx)
 
-# Class-based book list (existing)
+# Existing CBVs
 class BookListView(ListView):
     model = Book
     template_name = "relationship_app/book_list.html"
 
-# Class-based book detail (existing)
 class BookDetailView(DetailView):
     model = Book
     template_name = "relationship_app/book_detail.html"
 
-# Create book (existing; requires permission)
 class BookCreateView(PermissionRequiredMixin, CreateView):
     model = Book
     fields = ["title", "author"]
@@ -31,19 +29,16 @@ class BookCreateView(PermissionRequiredMixin, CreateView):
     template_name = "relationship_app/book_form.html"
     success_url = reverse_lazy("book_list")
 
-# Helper for role check (existing)
 def is_librarian(user):
     profile = getattr(user, "profile", None)
     return bool(profile and profile.role in ("LIBRARIAN", "ADMIN"))
 
-# Role-restricted library books (existing)
 @login_required
 @user_passes_test(is_librarian)
 def library_books(request, pk):
     library = get_object_or_404(Library, pk=pk)
     return render(request, "relationship_app/library_books.html", {"library": library})
 
-# Signup (existing)
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -59,18 +54,23 @@ def signup(request):
         form = SignUpForm()
     return render(request, "registration/signup.html", {"form": form})
 
-# ===== NEW FOR THIS TASK =====
+# ===== REQUIRED FOR THE TASK =====
 
-# Function-based view: list all books (HTML by default, plain text with ?as=text)
+# Function-based view: simple PLAIN TEXT list of "title by author"
 def list_books(request):
-    books = Book.objects.select_related("author").all()
-    if request.GET.get("as") == "text":
-        lines = [f"{b.title} by {b.author.name}" for b in books]
-        return HttpResponse("\n".join(lines), content_type="text/plain")
-    return render(request, "relationship_app/list_books.html", {"books": books})
+    books = Book.objects.all()
+    lines = []
+    for book in books:
+        lines.append(f"{book.title} by {book.author.name}")
+    return HttpResponse("\n".join(lines), content_type="text/plain")
 
-# Class-based view: details for one library (and its books)
+# Class-based view: details for a specific library + its books
 class LibraryDetailView(DetailView):
     model = Library
     template_name = "relationship_app/library_detail.html"
     context_object_name = "library"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["books"] = self.object.books.all()
+        return ctx
