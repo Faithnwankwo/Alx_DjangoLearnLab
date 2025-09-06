@@ -1,4 +1,5 @@
-﻿from django.contrib.auth.views import LoginView, LogoutView
+﻿from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -184,3 +185,4 @@ def librarian_view(request):
 def member_view(request):
     return HttpResponse("Member-only view")
 # === End role-gated views ===
+
