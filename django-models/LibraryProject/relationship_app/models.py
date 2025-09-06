@@ -1,4 +1,5 @@
-﻿class Book(models.Model):
+﻿from django.db import models
+class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
 
@@ -12,4 +13,5 @@
             ("can_change_book", "Can change book"),
             ("can_delete_book", "Can delete book"),
         )
+
 

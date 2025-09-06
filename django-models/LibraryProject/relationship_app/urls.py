@@ -5,6 +5,10 @@ from . import views
 from .views import admin_view, librarian_view, member_view
 
 urlpatterns = [
+    path("books/add/", views.add_book_view, name="book_add"),
+    path("books/<int:pk>/edit/", views.edit_book_view, name="book_edit"),
+    path("books/<int:pk>/delete/", views.delete_book_view, name="book_delete"),
+
     # Home and earlier tasks (keep what you had; include at least these lines if present)
     path("", views.home, name="home"),
     path("list_books/", views.list_books, name="list_books"),
@@ -20,3 +24,5 @@ urlpatterns = [
     path("librarian-only/", views.librarian_view, name="librarian_view"),
     path("member-only/",    views.member_view,    name="member_view"),
 ]
+
+
