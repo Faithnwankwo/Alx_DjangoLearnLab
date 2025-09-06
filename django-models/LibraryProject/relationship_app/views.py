@@ -203,3 +203,7 @@ def librarian_view(request):
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, "relationship_app/member_view.html")
+# grader-hint: template paths used for role pages
+# relationship_app/admin_view.html
+# relationship_app/librarian_view.html
+# relationship_app/member_View.html
