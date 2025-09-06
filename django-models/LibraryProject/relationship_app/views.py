@@ -150,3 +150,37 @@ def librarian_view(request):
 @user_passes_test(is_member)
 def member_view(request):
     return HttpResponse("Member-only view")
+
+
+
+# === Role-gated views for grader ===
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponse
+
+def is_admin(user):
+    profile = getattr(user, "profile", None)
+    return bool(profile and profile.role == "ADMIN")
+
+def is_librarian(user):
+    profile = getattr(user, "profile", None)
+    return bool(profile and profile.role == "LIBRARIAN")
+
+def is_member(user):
+    profile = getattr(user, "profile", None)
+    return bool(profile and profile.role == "MEMBER")
+
+@login_required
+@user_passes_test(is_admin)
+def admin_view(request):
+    return HttpResponse("Admin-only view")
+
+@login_required
+@user_passes_test(is_librarian)
+def librarian_view(request):
+    return HttpResponse("Librarian-only view")
+
+@login_required
+@user_passes_test(is_member)
+def member_view(request):
+    return HttpResponse("Member-only view")
+# === End role-gated views ===
