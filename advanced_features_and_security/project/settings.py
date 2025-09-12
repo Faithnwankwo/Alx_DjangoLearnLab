@@ -1,10 +1,11 @@
 ﻿from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "dev-secret-key-do-not-use-in-prod"
+SECRET_KEY = "dev-secret-key-change-me"
 DEBUG = True
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -13,8 +14,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "users.apps.UsersConfig",   # ← add this line
+
+    # Your apps
+    "users",
 ]
+AUTH_USER_MODEL = "users.CustomUser"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -66,11 +70,12 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# === Task 0 requirement: use the custom user model ===
-AUTH_USER_MODEL = "users.User"
-
-# === Media (for profile_photo) ===
+# Media (for profile photos)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# === Custom User Model ===
+AUTH_USER_MODEL = "users.CustomUser"
