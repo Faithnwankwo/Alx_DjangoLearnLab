@@ -13,7 +13,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "users.apps.UsersConfig",  # custom users app
+    "users.apps.UsersConfig",   # ← add this line
 ]
 
 MIDDLEWARE = [
@@ -68,7 +68,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# === Custom User ===
+# === Task 0 requirement: use the custom user model ===
 AUTH_USER_MODEL = "users.User"
 
 # === Media (for profile_photo) ===
