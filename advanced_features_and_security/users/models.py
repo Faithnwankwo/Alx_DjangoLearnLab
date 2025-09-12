@@ -1,7 +1,7 @@
-﻿@"
-from datetime import date
+﻿from datetime import date
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -32,6 +32,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
         return self._create_user(username, email, password, **extra_fields)
 
+
 class User(AbstractUser):
     date_of_birth = models.DateField(null=True, blank=True)
     profile_photo = models.ImageField(upload_to="profile_photos/", null=True, blank=True)
@@ -43,7 +44,8 @@ class User(AbstractUser):
             return None
         today = date.today()
         return (
-            today.year - self.date_of_birth.year
+            today.year
+            - self.date_of_birth.year
             - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
         )
-"@ | Set-Content -Encoding UTF8 .\advanced_features_and_security\users\models.py
+
