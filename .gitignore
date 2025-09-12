@@ -1,17 +1,10 @@
-# Python
+﻿.venv/
 __pycache__/
-*.py[cod]
-*.log
-
-# Virtual env
-.venv/
-
-# Django DB
 db.sqlite3
-
-# OS
+media/
+*.pyc
+*.pyo
+*.pyd
+*.log
 .DS_Store
-Thumbs.db
-
-# Secrets
 .env
