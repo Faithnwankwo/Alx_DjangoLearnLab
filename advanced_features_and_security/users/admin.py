@@ -1,7 +1,7 @@
 ﻿from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
-from .models import User   # <-- import the correct class name
+from .models import User
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
@@ -12,14 +12,12 @@ class UserAdmin(DjangoUserAdmin):
         (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
-
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
             "fields": ("username", "email", "password1", "password2", "date_of_birth", "profile_photo"),
         }),
     )
-
     list_display = ("username", "email", "first_name", "last_name", "is_staff", "date_of_birth")
     search_fields = ("username", "first_name", "last_name", "email")
     ordering = ("username",)
