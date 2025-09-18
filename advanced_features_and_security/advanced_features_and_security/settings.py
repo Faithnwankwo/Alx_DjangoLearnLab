@@ -79,6 +79,8 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = "static/"
+from pathlib import Path  # already at top of file, ok if duplicated import removed
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files (for profile photos)
 MEDIA_URL = "/media/"
@@ -87,3 +89,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Use your custom user model
 AUTH_USER_MODEL = "users.CustomUser"
+
+# Use console backend so password reset "emails" appear in the terminal
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Tell Django where our templates live (project-level templates folder)
+from pathlib import Path
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
