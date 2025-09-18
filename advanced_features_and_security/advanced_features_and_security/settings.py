@@ -1,11 +1,19 @@
-﻿from pathlib import Path
+# settings.py for advanced_features_and_security
+# ----------------------------------------------
+from pathlib import Path
+import os
 
+# BASE_DIR points to: C:\Users\user\Alx_DjangoLearnLab\advanced_features_and_security
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "dev-secret-key-change-me"
-DEBUG = True
-ALLOWED_HOSTS = []
+# Replace with your existing secret key if you have one already
+SECRET_KEY = "PASTE-YOUR-EXISTING-SECRET-KEY-HERE"
 
+# Development settings
+DEBUG = True
+ALLOWED_HOSTS: list[str] = []
+
+# Installed apps
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -13,6 +21,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Your custom app (must be plural: users)
     "users",
 ]
 
@@ -26,7 +35,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "project.urls"
+ROOT_URLCONF = "advanced_features_and_security.urls"
 
 TEMPLATES = [
     {
@@ -44,12 +53,17 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "project.wsgi.application"
+WSGI_APPLICATION = "advanced_features_and_security.wsgi.application"
 
+# Database (SQLite by default)
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
 
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -57,15 +71,21 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+# Internationalization
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = "UTC"  # change to "America/Regina" if you prefer
 USE_I18N = True
 USE_TZ = True
 
+# Static files
 STATIC_URL = "static/"
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
 
+# Media files (for profile photos, uploads)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Default primary key type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "users.CustomUser"
+# Use your custom user model
+AUTH_USER_MODEL = "users.User"
