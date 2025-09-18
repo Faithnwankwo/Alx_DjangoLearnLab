@@ -80,12 +80,10 @@ USE_TZ = True
 # Static files
 STATIC_URL = "static/"
 
-# Media files (for profile photos, uploads)
+# Media files (for profile photos)
 MEDIA_URL = "/media/"
+import os
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Default primary key type
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 # Use your custom user model
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "users.CustomUser"
