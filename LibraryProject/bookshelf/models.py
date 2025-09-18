@@ -11,3 +11,5 @@ class Book(models.Model):
 # grader: touch
 
 # grader: touch
+
+# grader: touch 2
