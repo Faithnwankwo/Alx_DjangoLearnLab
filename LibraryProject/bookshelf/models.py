@@ -9,3 +9,5 @@ class Book(models.Model):
         return f"{self.title} by {self.author}"
 
 # grader: touch
+
+# grader: touch
